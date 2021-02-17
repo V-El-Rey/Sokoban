@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
-public class BoxViewModel : CheckIsBlocked
+public class BoxViewModel : ICheckIsBlocked
 {
     private readonly BoxModel _boxModel;
 
@@ -20,30 +21,98 @@ public class BoxViewModel : CheckIsBlocked
     {
         return _boxModel.Position;
     }
-    public void Move(string direction)
+    public void Move(Vector3 nextPosition, string direction)
     {
         switch (direction)
         {
             case "Up":
             {
-                _boxModel.Position.y += 1;
+                if (!IsBlocked(nextPosition, direction))
+                {
+                    _boxModel.Position.y += 1;
+                }
+                
             }
                 break;
             case "Down":
             {
-                _boxModel.Position.y -= 1;
+                if (!IsBlocked(nextPosition, direction))
+                {
+                    _boxModel.Position.y -= 1;
+                }
+               
             }
                 break;
             case "Left":
             {
-                _boxModel.Position.x -= 1;
+                if (!IsBlocked(nextPosition, direction))
+                {
+                    _boxModel.Position.x -= 1;
+                }
+                
             }
                 break;
             case "Right":
             {
-                _boxModel.Position.x += 1;
+                if (!IsBlocked(nextPosition, direction))
+                {
+                    _boxModel.Position.x += 1;
+                }
+                
             }
                 break;
         }
+    }
+
+    public bool IsBlocked(Vector3 position, string direction)
+    {
+        var walls = GameObject.FindGameObjectsWithTag("Wall");
+        var boxes = GameObject.FindGameObjectsWithTag("Box");
+        var nextPosition = new Vector3();
+        switch (direction)
+        {
+            case "Up":
+            {
+                nextPosition = position;
+                nextPosition.y += 1;
+            }
+                break;
+            case "Down":
+            {
+                nextPosition = position;
+                nextPosition.y -= 1;
+            }
+                break;
+            case "Left":
+            {
+                nextPosition = position;
+                nextPosition.x -= 1;
+            }
+                break;
+            case "Right":
+            {
+                nextPosition = position;
+                nextPosition.x += 1;
+            }
+                break;
+        }
+
+        foreach (var wall in walls)
+        {
+            if (wall.transform.position == nextPosition)
+            {
+                return true;
+            }
+        }
+
+        foreach (var box in boxes)
+        {
+            if (box.transform.position == nextPosition)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

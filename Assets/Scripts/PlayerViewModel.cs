@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Object = System.Object;
 
-public class PlayerViewModel : CheckIsBlocked
+public class PlayerViewModel : ICheckIsBlocked
 {
     private readonly PlayerModel _playerModel;
     public PlayerViewModel(PlayerModel model)
@@ -69,5 +69,62 @@ public class PlayerViewModel : CheckIsBlocked
         {
             _playerModel.Position.x += 1;
         }
+    }
+
+    public bool IsBlocked(Vector3 position, string direction)
+    {
+        var walls = GameObject.FindGameObjectsWithTag("Wall");
+        var boxes = GameObject.FindGameObjectsWithTag("Box");
+        var nextPosition = new Vector3();
+        switch (direction)
+        {
+            case "Up":
+            {
+                nextPosition = position;
+                nextPosition.y += 1;
+            }
+                break;
+            case "Down":
+            {
+                nextPosition = position;
+                nextPosition.y -= 1;
+            }
+                break;
+            case "Left":
+            {
+                nextPosition = position;
+                nextPosition.x -= 1;
+            }
+                break;
+            case "Right":
+            {
+                nextPosition = position;
+                nextPosition.x += 1;
+            }
+                break;
+        }
+
+        foreach (var wall in walls)
+        {
+            if (wall.transform.position == nextPosition)
+            {
+                return true;
+            }
+        }
+
+        foreach (var box in boxes)
+        {
+            if (box.transform.position == nextPosition)
+            {
+                var Box = box.GetComponent<BoxView>();
+                if (Box.IsBlocked(nextPosition, direction))
+                {
+                    return true;
+                }
+                Box.MoveBox(nextPosition, direction);
+            }
+        }
+
+        return false;
     }
 }

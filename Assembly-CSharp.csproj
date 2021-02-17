@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\BoxViewModel.cs" />
      <Compile Include="Assets\Scripts\PlayerViewModel.cs" />
      <Compile Include="Assets\Scripts\PlayerModel.cs" />
+     <Compile Include="Assets\CrossView.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

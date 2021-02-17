@@ -12,9 +12,14 @@ public class BoxView : MonoBehaviour
         _viewModel.GetPosition(transform.position);
     }
 
-    public void MoveBox(string direction)
+    public void MoveBox(Vector3 nextPosition, string direction)
     {
-        _viewModel.Move(direction);
+        _viewModel.Move(nextPosition, direction);
         transform.position = _viewModel.PushPosition();
+    }
+
+    public bool IsBlocked(Vector3 nextPosition, string direction)
+    {
+        return _viewModel.IsBlocked(nextPosition, direction);
     }
 }
