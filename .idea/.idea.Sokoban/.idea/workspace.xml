@@ -16,6 +16,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/BoxView.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/BoxViewModel.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerViewModel.cs" />
+      <option value="$PROJECT_DIR$/Assets/GameStarter.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1od3bHDNjeIzB2JJ6YD2WFUa4V7" />
@@ -66,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1613602713332</updated>
       <workItem from="1613602719150" duration="3160000" />
+      <workItem from="1613639396499" duration="1695000" />
     </task>
     <servers />
   </component>

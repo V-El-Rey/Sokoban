@@ -8,6 +8,9 @@
       <e p="Assets" t="Include">
         <e p="CrossView.cs" t="Include" />
         <e p="GameStarter.cs" t="Include" />
+        <e p="Resources" t="Include">
+          <e p="Levels.txt" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="BoxModel.cs" t="Include" />
           <e p="BoxView.cs" t="Include" />
